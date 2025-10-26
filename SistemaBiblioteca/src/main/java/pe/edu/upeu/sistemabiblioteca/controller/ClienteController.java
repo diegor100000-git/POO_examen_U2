@@ -125,7 +125,7 @@ public class ClienteController {
     @FXML
     public void crearCliente(){
 
-        lblError.setText(""); // limpia errores previos
+        lblError.setText("");
 
         Cliente cliente = new Cliente();
         cliente.setDni(txtDni.getText());
@@ -134,7 +134,6 @@ public class ClienteController {
         cliente.setDireccion(txtDireccion.getText());
         cliente.setTelefono(txtTelefono.getText());
 
-        // VALIDACIÓN con Jakarta Validation
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Cliente>> validaciones = validator.validate(cliente);
@@ -145,15 +144,13 @@ public class ClienteController {
             return;
         }
 
-        // Obtener Stage actual
         Stage stage = (Stage) tableView.getScene().getWindow();
 
-        // Guardar o actualizar
         if (cs.findByDni(cliente.getDni()) == null) {
             cs.save(cliente);
             Toast.showToast(stage, "✅ Cliente registrado correctamente", 2500,
-                    stage.getX() + stage.getWidth() - 350,  // esquina derecha
-                    stage.getY() + stage.getHeight() - 100); // parte inferior
+                    stage.getX() + stage.getWidth() - 350,
+                    stage.getY() + stage.getHeight() - 100);
         } else {
             cs.update(cliente.getDni(), cliente);
             Toast.showToast(stage, "📝 Cliente actualizado correctamente", 2500,
