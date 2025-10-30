@@ -23,7 +23,7 @@ public class Cliente {
     @Id
     @Column(name = "dni", nullable = false, length = 8)
     @NotBlank(message = "El DNI no puede estar vacío.")
-    @Size (min = 8, max = 8, message = "El nombre debe tener 8 caracteres")
+    @Size (min = 8, max = 8, message = "El DNI debe tener 8 caracteres")
     private String dni;
 
     @NotBlank(message = "El nombre no puede estar vacío.")
